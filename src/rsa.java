@@ -11,7 +11,7 @@ public class rsa {
 	
 	private Random random = new Random();
 	
-	private void generateKeys() {
+	public void generateKeys() {
 	
 		BigInteger p = BigInteger.probablePrime(length, random);
 		BigInteger q = BigInteger.probablePrime(length, random);
@@ -21,6 +21,20 @@ public class rsa {
 	    }
 		
 		BigInteger n = p.multiply(q);
+		
+		BigInteger phiN = (p.subtract(BigInteger.ONE)).multiply(q.subtract(BigInteger.ONE));
+		
+		// Setting e to biggest Fermat number 65537
+		publicKey = new BigInteger("65537");
+		
+		// 'd': d = e^(-1) mod φ(n), division = multiplicate inverse modulu ...
+		privateKey = publicKey.modInverse(phiN);
+		
 	}
+	
+	public void encrypt( ) {
+		
+	}
+	
 }
 
