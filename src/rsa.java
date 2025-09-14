@@ -45,7 +45,19 @@ public class rsa {
 		
 	}
 	
-	public void encrypt( ) {
+	public BigInteger encrypt(String message, BigInteger key, BigInteger mod) {
+		
+		byte[] messageBytes = message.getBytes();
+		
+		BigInteger messageBigInt = new BigInteger(1, messageBytes);
+		
+		// m < n, TODO: break message into blocks, each of which is less than n.
+		if (messageBigInt.compareTo(mod) >= 0) {
+			throw new IllegalArgumentException("Message is too long for the current key size");
+		}
+		
+		// encrypts m (message) as c = m^e (mod n)
+		return messageBigInt.modPow(key, mod);
 		
 	}
 	
