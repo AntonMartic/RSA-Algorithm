@@ -10,9 +10,8 @@ public class rsa {
 	
 	private BigInteger modulus;
 	
-	// choose 1024 later, 
-	// TODO: factor the modulus n with a simple online tool) to break the encryption with lower bit
-	private int bitLength = 64; 
+	// TODO: factor the modulus n with a simple online tool to break the encryption with lower bit like 16, 32, 64 
+	private int bitLength = 1024; 
 	
 	private SecureRandom random;
 	
@@ -39,7 +38,7 @@ public class rsa {
 		// Setting e to biggest Fermat number 65537
 		publicKey = new BigInteger("65537");
 		
-		// 'd': d = e^(-1) mod φ(n), division = multiplicate inverse modulu ...
+		// 'd': d = e^(-1) mod φ(n), division = multiplicate inverse modulus ...
 		privateKey = publicKey.modInverse(phiN);
 		
 	}

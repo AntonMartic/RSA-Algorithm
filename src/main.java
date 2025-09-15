@@ -15,6 +15,9 @@ public class main {
 	    BigInteger ciphertext = rsa.encrypt(originalMessage, rsa.getPublicKey(), rsa.getModulus());
 	    System.out.println("Encrypted Ciphertext (as number): " + ciphertext);
 	    
+	    // Modulus (n)
+	    // System.out.println("Public Modulus n: " + rsa.getModulus());
+	    
 	    // Decrypt message with private key
 	    String decryptedMessage = rsa.decrypt(ciphertext, rsa.getPrivateKey(), rsa.getModulus());
 	    System.out.println("Decrypted Message: " + decryptedMessage);
