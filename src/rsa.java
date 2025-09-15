@@ -16,7 +16,6 @@ public class rsa {
 	
 	private SecureRandom random;
 	
-	
 	public rsa() {
 		random = new SecureRandom();
 		generateKeys();
@@ -43,6 +42,18 @@ public class rsa {
 		// 'd': d = e^(-1) mod φ(n), division = multiplicate inverse modulu ...
 		privateKey = publicKey.modInverse(phiN);
 		
+	}
+	
+	public BigInteger getPublicKey() {
+	    return publicKey;
+	}
+	
+	public BigInteger getPrivateKey() {
+	    return privateKey;
+	}
+	
+	public BigInteger getModulus() {
+	    return modulus;
 	}
 	
 	public BigInteger encrypt(String message, BigInteger key, BigInteger mod) {
