@@ -47,8 +47,10 @@ public class rsa {
 	
 	public BigInteger encrypt(String message, BigInteger key, BigInteger mod) {
 		
+		// Convert the message string into a byte array
 		byte[] messageBytes = message.getBytes();
 		
+		// Turn into a number
 		BigInteger messageBigInt = new BigInteger(1, messageBytes);
 		
 		// m < n, TODO: break message into blocks, each of which is less than n.
@@ -58,7 +60,27 @@ public class rsa {
 		
 		// encrypts m (message) as c = m^e (mod n)
 		return messageBigInt.modPow(key, mod);
+	
+	}
+	
+	public String decrypt(BigInteger cyphertext, BigInteger key, BigInteger mod) {
 		
+		// m = c^d (mod n)
+		BigInteger decryptedBigInt = cyphertext.modPow(key, mod);
+		
+		// Convert the decrypted BigInteger back to a byte array
+		byte[] decryptedBytes = decryptedBigInt.toByteArray();
+		
+	    // Handle that BigInteger.toByteArray() may add a leading 0 to indicate a positive number.
+		if (decryptedBytes[0] == 0) {
+	        // Create a new array without the first byte
+	        byte[] temp = new byte[decryptedBytes.length - 1];
+	        System.arraycopy(decryptedBytes, 1, temp, 0, temp.length);
+	        decryptedBytes = temp;
+	    }
+		
+		// Convert the byte array back to the original string
+		return new String(decryptedBytes);
 	}
 	
 }
