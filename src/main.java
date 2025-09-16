@@ -1,5 +1,6 @@
 
 import java.math.BigInteger;
+import java.util.Scanner;
 
 public class main {
 
@@ -8,7 +9,10 @@ public class main {
 		rsa rsa = new rsa();
 		
 		// Message
-	    String originalMessage = "Secret message";
+		Scanner s = new Scanner(System.in);
+		System.out.println("Enter message:");
+		
+		String originalMessage = s.nextLine();
 	    System.out.println("Original Message: " + originalMessage);
 	    
 	    // Encrypt message with public key

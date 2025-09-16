@@ -2,6 +2,18 @@
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
+/*
+ * RSA Algorithm
+ * 
+ * 1. Bob chooses secret primes p and q and computes n = pq.
+ * 2. Bob chooses e with gcd(e, (p - 1)(q - 1)) = 1.
+ * 3. Bob computes d with de = 1 (mod (p - l)(q - 1)).
+ * 4. Bob makes n and e public, and keeps p, q, d secret.
+ * 5. Alice encrypts m as c = m^e (mod n) and sends c to Bob.
+ * 6. Bob decrypts by computing m = c^d (mod n).
+ * 
+ */
+
 public class rsa {
 
 	private BigInteger privateKey;
@@ -38,6 +50,11 @@ public class rsa {
 		// Setting e to biggest Fermat number 65537
 		publicKey = new BigInteger("65537");
 		
+		// Ensure e is coprime with φ(n) (gcd(e, φ(n)) == 1)
+		while (!phiN.gcd(publicKey).equals(BigInteger.ONE)) {
+	        publicKey = publicKey.add(BigInteger.ONE);
+	    }
+
 		// 'd': d = e^(-1) mod φ(n), division = multiplicate inverse modulus ...
 		privateKey = publicKey.modInverse(phiN);
 		
